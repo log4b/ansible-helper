@@ -1,0 +1,17 @@
+---
+
+- hosts: yoda-hosts
+  serial: 3
+
+  tasks:
+  - copy:
+      src: repo/td-agent-bit.repo
+      dest: /etc/yum.repos.d/
+      owner: root
+      group: root
+      mode: "u=rw,g=r,o=r"
+
+  - name: install fluentd agent
+    yum:
+      name: "td-agent-bit"
+      state: present
